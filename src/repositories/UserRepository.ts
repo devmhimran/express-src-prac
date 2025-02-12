@@ -4,8 +4,16 @@ import { IUserRepository } from '../interfaces/IUserRepository';
 
 @injectable()
 export class UserRepository implements IUserRepository {
-  async getUsers() {
-    return await prisma.user.findMany();
+  async getUsers(page: number, limit: number) {
+    const offset = (page - 1) * limit;
+    return prisma.user.findMany({
+      skip: offset,
+      take: limit,
+    });
+  }
+
+  async getTotalUsers() {
+    return await prisma.user.count();
   }
 
   async getUserById(id: string) {

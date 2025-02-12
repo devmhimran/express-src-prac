@@ -1,5 +1,5 @@
 export interface IUserService {
-  getUsers: () => Promise<any>;
+  getUsers: (page: number, limit: number) => Promise<any>;
   getUserById(id: string): Promise<any>;
   createUser(name: string, email: string): Promise<any>;
 }

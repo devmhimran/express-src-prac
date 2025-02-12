@@ -5,11 +5,13 @@ import { UserController } from '../controllers/UserController';
 import { IUserRepository } from '../interfaces/IUserRepository';
 import { TYPES } from '../constants/type';
 import { IUserService } from '../interfaces/IUserSercice';
+import { Pagination } from '../utils';
 
 const container = new Container();
 
 container.bind<IUserRepository>(TYPES.UserRepository).to(UserRepository);
 container.bind<IUserService>(TYPES.UserService).to(UserService);
 container.bind<UserController>(UserController).toSelf();
+container.bind(Pagination).toSelf();
 
 export { container };

@@ -8,12 +8,14 @@ export class UserController {
   constructor(@inject(TYPES.UserService) private userService: IUserService) {}
 
   async getUsers(req: Request, res: Response) {
+    const page = parseInt(req.query.page as string) || 1;
+    const limit = parseInt(req.query.limit as string) || 10;
+
     try {
-      const users = await this.userService.getUsers();
-      console.log({ users });
-      res.json(users);
-    } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      const result = await this.userService.getUsers(page, limit);
+      res.json(result);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
     }
   }
 
