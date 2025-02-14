@@ -9,6 +9,11 @@ export class UserRepository implements IUserRepository {
     return prisma.user.findMany({
       skip: offset,
       take: limit,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
     });
   }
 
@@ -20,7 +25,13 @@ export class UserRepository implements IUserRepository {
     return await prisma.user.findUnique({ where: { id } });
   }
 
-  async createUser(data: { name: string; email: string }) {
-    return await prisma.user.create({ data });
+  async getUserByEmail(email: string) {
+    return prisma.user.findUnique({ where: { email } });
+  }
+
+  async createUser(name: string, email: string, password: string) {
+    return prisma.user.create({
+      data: { name, email, password },
+    });
   }
 }

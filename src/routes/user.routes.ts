@@ -15,7 +15,7 @@ router.get(
 );
 router.post(
   '/',
-  userController.addUser.bind(userController) as express.RequestHandler
+  userController.createUser.bind(userController) as express.RequestHandler
 );
 
 export default router;

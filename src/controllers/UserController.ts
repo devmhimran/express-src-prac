@@ -29,10 +29,10 @@ export class UserController {
     }
   }
 
-  async addUser(req: Request, res: Response) {
+  async createUser(req: Request, res: Response) {
     try {
-      const { name, email } = req.body;
-      const newUser = await this.userService.createUser(name, email);
+      const { name, email, password } = req.body;
+      const newUser = await this.userService.createUser(name, email, password);
       res.status(201).json(newUser);
     } catch (error) {
       res.status(500).json({ error: 'Internal Server Error' });
