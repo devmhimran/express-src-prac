@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 import { Request, Response } from 'express';
 import { TYPES } from '../constants/type';
-import { IUserService } from '../interfaces/IUserSercice';
+import { IUserService } from '../interfaces/IUserService';
 
 @injectable()
 export class UserController {

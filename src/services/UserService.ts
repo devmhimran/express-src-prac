@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 
 import { IUserRepository } from '../interfaces/IUserRepository';
-import { IUserService } from '../interfaces/IUserSercice';
+import { IUserService } from '../interfaces/IUserService';
 import { TYPES } from '../constants/type';
 import { Pagination } from '../utils';
 import bcrypt from 'bcryptjs';

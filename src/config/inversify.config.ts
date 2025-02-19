@@ -4,7 +4,7 @@ import { UserService } from '../services/UserService';
 import { UserController } from '../controllers/UserController';
 import { IUserRepository } from '../interfaces/IUserRepository';
 import { TYPES } from '../constants/type';
-import { IUserService } from '../interfaces/IUserSercice';
+import { IUserService } from '../interfaces/IUserService';
 import { Pagination } from '../utils';
 
 const container = new Container();
