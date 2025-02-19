@@ -30,9 +30,11 @@ export class UserService implements IUserService {
     const existingUser = await this.userRepository.getUserByEmail(email);
 
     if (existingUser) throw new Error('Email already in use');
-
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    return this.userRepository.createUser(name, email, hashedPassword);
+    return {
+      message: 'User created successfully',
+      data: await this.userRepository.createUser(name, email, hashedPassword),
+    };
   }
 }
