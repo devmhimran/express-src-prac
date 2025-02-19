@@ -1,6 +1,8 @@
 import express from 'express';
 import { container } from '../config/inversify.config';
 import { UserController } from '../controllers/UserController';
+import { validateRequest } from '../middlewares/validateRequest';
+import { createUserSchema } from '../validators/UserValidators';
 
 const router = express.Router();
 const userController = container.get(UserController);
@@ -15,6 +17,7 @@ router.get(
 );
 router.post(
   '/',
+  validateRequest(createUserSchema),
   userController.createUser.bind(userController) as express.RequestHandler
 );
 

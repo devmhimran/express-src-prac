@@ -1,7 +1,8 @@
 import { injectable, inject } from 'inversify';
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { TYPES } from '../constants/type';
 import { IUserService } from '../interfaces/IUserService';
+import { createUserSchema } from '../validators/UserValidators';
 
 @injectable()
 export class UserController {
@@ -29,13 +30,18 @@ export class UserController {
     }
   }
 
-  async createUser(req: Request, res: Response) {
+  async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { name, email, password } = req.body;
-      const newUser = await this.userService.createUser(name, email, password);
+      const validateData = createUserSchema.parse({ name, email, password });
+      const newUser = await this.userService.createUser(
+        validateData.name,
+        validateData.email,
+        validateData.password
+      );
       res.status(201).json(newUser);
     } catch (error) {
-      res.status(500).json({ error: 'Internal Server Error' });
+      next(error);
     }
   }
 }

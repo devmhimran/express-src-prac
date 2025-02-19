@@ -1,4 +1,4 @@
-import 'reflect-metadata'; // Required for Inversify
+import 'reflect-metadata';
 import { app } from './app';
 
 const PORT = process.env.PORT || 5000;
